@@ -11,9 +11,12 @@ const request = axios.create({
 
 request.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem('tokenUser')
+    const token = getCookie('token')
+    console.log(token)
     if (token) {
-      config.headers['Authorization'] = `Sky ${localStorage.getItem('tokenUser')}`
+      config.headers['Authorization'] = `Bearer ${token}`
+    } else {
+      window.location.href = window.location.origin + '/login'
     }
     return config
   },
@@ -36,6 +39,21 @@ request.interceptors.response.use(
     return Promise.reject(error)
   }
 )
+
+function getCookie(cname) {
+  let name = cname + '='
+  let ca = document.cookie.split(';')
+  for (let i = 0; i < ca.length; i++) {
+    let c = ca[i]
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1)
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length)
+    }
+  }
+  return ''
+}
 
 export default () => {
   return request

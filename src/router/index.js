@@ -15,9 +15,21 @@ const routes = [
     path: '/home/my-booking',
     name: 'my-booking',
     component: () => import('@/views/home/MyBooking.vue')
-  }
+  },
+  {
+    path: '/home/list-pitch',
+    name: 'list-pitch',
+    component: () => import('@/views/home/ListPitch.vue')
+  },
+  {
+    path: '/log-out',
+    name: 'log-out',
+    component: () => {
+      window.location.href = window.location.origin + '/login'
+    }
+  },
 
-  // { path: '/:pathMatch(.*)*', redirect: '/' }
+  { path: '/:pathMatch(.*)*', redirect: '/' }
 ]
 
 const router = createRouter({

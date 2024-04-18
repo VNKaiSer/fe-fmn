@@ -57,6 +57,7 @@
                   </div>
                 </div>
                 <div class="grid grid-cols-5">
+                  ``
                   <div class="col-span-5 lg:col-span-1 flex items-center max-lg:mt-3">
                     <div class="flex gap-3 lg:block">
                       <p class="font-medium text-sm leading-7 text-black">Tổng tiền</p>
@@ -187,9 +188,41 @@
       </div>
     </div>
   </section>
+  <ModalCreatePitch>
+    <v-modal
+      v-if="showModal"
+      type="danger"
+      title="Confirm Action"
+      width="sm"
+      v-on:close="showModal = false"
+    >
+      <p class="text-gray-800">
+        Are you sure you want you delete your account? This action cannot be undone.
+      </p>
+
+      <div class="text-right mt-4">
+        <button
+          @click="showModal = false"
+          class="px-4 py-2 text-sm text-gray-600 focus:outline-none hover:underline"
+        >
+          Cancel
+        </button>
+        <button
+          class="mr-2 px-4 py-2 text-sm rounded text-white bg-red-500 focus:outline-none hover:bg-red-400"
+        >
+          Delete
+        </button>
+      </div>
+    </v-modal>
+  </ModalCreatePitch>
 </template>
 <script>
 export default {
-  name: 'MyBooking'
+  name: 'MyBooking',
+  data() {
+    return {
+      showModalCreate: false
+    }
+  }
 }
 </script>

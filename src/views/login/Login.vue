@@ -99,7 +99,6 @@ export default {
   },
   methods: {
     validateLoginForm() {
-      console.log('hihi')
       if (!this.email) {
         this.$notify({
           title: 'Cảnh báo',
@@ -137,6 +136,7 @@ export default {
           // đợi
           setTimeout(() => {
             this.$cookies.set('token', result.data.access_token)
+            localStorage.setItem('tokenUser', result.data.access_token)
             if (result) {
               this.$router.push({ name: 'home' })
             }
